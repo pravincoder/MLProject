@@ -22,4 +22,5 @@ author = 'Pravin Maurya',
 author_email = 'PravinCoder@gmail.com',
 packages=find_packages(),
 install_requirements = get_requirements('requirements.txt'),
+Mentor='Krish Naik'
 )
