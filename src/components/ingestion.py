@@ -6,8 +6,12 @@ from sklearn.model_selection import train_test_split
 
 from src.exception import CustomException
 from src.logger import logging
+#
 from src.components.data_transformation import DataTransformationConfig
 from src.components.data_transformation import DataTransformation
+#
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 
 from dataclasses import dataclass
 
@@ -15,9 +19,9 @@ from dataclasses import dataclass
 @dataclass
 class DataIngestionConfig:
     """Configure Data Ingestion path"""
-    train_data_path: str = os.path.join('aritifact', 'train.csv')
-    test_data_path: str = os.path.join('aritifact', 'test.csv')
-    raw_data_path: str = os.path.join('aritifact', 'data.csv')
+    train_data_path: str = os.path.join('aritifacts', 'train.csv')
+    test_data_path: str = os.path.join('aritifacts', 'test.csv')
+    raw_data_path: str = os.path.join('aritifacts', 'data.csv')
 
 
 class DataIngestion:
@@ -61,4 +65,6 @@ if __name__ == '__main__':
     obj = DataIngestion()
     train_data,test_data=obj.initiate_data_ingestion()
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,_ = data_transformation.initiate_data_transformation(train_data,test_data)
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_trainer(train_arr,test_arr))
